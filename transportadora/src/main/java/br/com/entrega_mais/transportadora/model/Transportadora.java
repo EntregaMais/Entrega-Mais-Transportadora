@@ -38,10 +38,10 @@ public class Transportadora implements Serializable {
     @NotEmpty(message = "O nome do responsável é obrigatório!")
     private String nm_resp;
 
-    @CPF
-    @NotBlank(message = "CPF é obrigatório!")
-    @Digits(integer = 11, fraction = 0, message = "Informe um CPF válido")
-    private String cpf;
+//    @CPF
+//    @NotBlank(message = "CPF é obrigatório!")
+//    @Digits(integer = 11, fraction = 0, message = "Informe um CPF válido")
+//    private String cpf;
 
     @CNPJ
     @NotBlank(message = "CNPJ é obrigatório!")
@@ -51,8 +51,6 @@ public class Transportadora implements Serializable {
     private String telefone;
 
     private String setor;
-
-    private String vaga;
 
     private boolean cobra_embarque = false;
 

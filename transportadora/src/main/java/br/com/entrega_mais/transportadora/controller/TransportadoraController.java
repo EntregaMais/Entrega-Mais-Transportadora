@@ -18,6 +18,8 @@ public class TransportadoraController {
     @Autowired
     TransportadoraRepository transportadoraRepository;
 
+
+    //TODO associar a um usuario
     @RequestMapping(method = RequestMethod.POST)
     @Transactional
     public void salvar(@Valid Transportadora transportadora) {
