@@ -1,5 +1,6 @@
 package br.com.entrega_mais.transportadora.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,7 +25,7 @@ public class Transportadora implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private long id;
 
     @Transient
     private String email;
@@ -38,12 +39,7 @@ public class Transportadora implements Serializable {
     @NotEmpty(message = "O nome do responsável é obrigatório!")
     private String nm_resp;
 
-//    @CPF
-//    @NotBlank(message = "CPF é obrigatório!")
-//    @Digits(integer = 11, fraction = 0, message = "Informe um CPF válido")
-//    private String cpf;
-
-    @CNPJ
+    //@CNPJ
     @NotBlank(message = "CNPJ é obrigatório!")
     @Digits(integer = 14, fraction = 0, message = "Informe um CNPJ válido")
     private String cnpj;
@@ -55,5 +51,7 @@ public class Transportadora implements Serializable {
     private boolean cobra_embarque = false;
 
     private String pix;
+
+    private String id_usuario;
 
 }

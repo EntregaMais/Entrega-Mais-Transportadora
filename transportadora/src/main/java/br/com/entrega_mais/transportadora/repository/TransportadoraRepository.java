@@ -10,4 +10,7 @@ import java.util.Optional;
 public interface TransportadoraRepository extends JpaRepository<Transportadora, Integer> {
 
     Optional<Transportadora> findByCnpj(String cnpj);
+    Optional<Transportadora> findById(long id);
+    Optional<Transportadora> findById_usuario(String id_usuario);
+
 }
