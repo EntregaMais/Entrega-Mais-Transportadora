@@ -2,6 +2,7 @@ package br.com.entrega_mais.transportadora.controller;
 
 import br.com.entrega_mais.transportadora.model.Transportadora;
 import br.com.entrega_mais.transportadora.repository.TransportadoraRepository;
+import br.com.entrega_mais.transportadora.service.RabbitmqService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -9,10 +10,7 @@ import com.google.gson.Gson;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
@@ -21,6 +19,7 @@ import org.springframework.web.client.RestTemplate;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.Map;
+import java.util.Optional;
 
 
 @RestController
@@ -30,6 +29,8 @@ public class TransportadoraController {
     @Autowired
     TransportadoraRepository transportadoraRepository;
 
+    @Autowired
+    private RabbitmqService rabbitmqService;
 
     //TODO add validacioes
     @Transactional
@@ -58,7 +59,20 @@ public class TransportadoraController {
         int idcoletado = ((Number)attributes.get("id")).intValue();
         transportadora.setIdusuario(Integer.toString(idcoletado));
 
+        //this.rabbitmqService.enviaMensagem("filacadastroresposta", transportadora);
         return ResponseEntity.ok(transportadoraRepository.save(transportadora));
     }
+
+
+    @RequestMapping(value = "/TransportadoraPorEmail/email}", method = RequestMethod.GET)
+    public ResponseEntity<Transportadora> GetByEmail(@PathVariable(value = "email") String email)
+    {
+        Optional<Transportadora> transportadora = transportadoraRepository.findByEmail(email);
+        if(transportadora.isPresent())
+            return new ResponseEntity<Transportadora>(transportadora.get(), HttpStatus.OK);
+        else
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
 
 }
