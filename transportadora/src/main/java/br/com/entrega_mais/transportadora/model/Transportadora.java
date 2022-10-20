@@ -25,7 +25,7 @@ public class Transportadora implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Transient
     private String email;
