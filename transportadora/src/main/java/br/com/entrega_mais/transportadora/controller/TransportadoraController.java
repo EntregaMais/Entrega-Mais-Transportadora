@@ -52,7 +52,7 @@ public class TransportadoraController {
         Gson gson = new Gson();
         Map<String,Object> attributes = gson.fromJson(gson.toJson( responseEntityStr.getBody()),Map.class);
 
-        transportadora.setId_usuario(attributes.get("id").toString());
+        transportadora.setIdusuario(attributes.get("id").toString());
 
 
         return ResponseEntity.ok(transportadoraRepository.save(transportadora));

@@ -52,6 +52,6 @@ public class Transportadora implements Serializable {
 
     private String pix;
 
-    private String id_usuario;
+    private String idusuario;
 
 }

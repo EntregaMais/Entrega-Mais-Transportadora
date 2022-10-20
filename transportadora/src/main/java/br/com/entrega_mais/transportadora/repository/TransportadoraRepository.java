@@ -11,6 +11,6 @@ public interface TransportadoraRepository extends JpaRepository<Transportadora, 
 
     Optional<Transportadora> findByCnpj(String cnpj);
     Optional<Transportadora> findById(Long id);
-    Optional<Transportadora> findById_usuario(String id_usuario);
+    Optional<Transportadora> findByIdusuario(String idusuario);
 
 }
