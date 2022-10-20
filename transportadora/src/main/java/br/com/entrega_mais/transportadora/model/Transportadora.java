@@ -27,31 +27,32 @@ public class Transportadora implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Transient
     private String email;
 
     @Transient
     private String password;
 
-    @NotEmpty(message = "O nome da empresa é obrigatório!")
+    //@NotEmpty(message = "O nome da empresa é obrigatório!")
     private String nm_empresa;
 
-    @NotEmpty(message = "O nome do responsável é obrigatório!")
+    //@NotEmpty(message = "O nome do responsável é obrigatório!")
     private String nm_resp;
 
     //@CNPJ
-    @NotBlank(message = "CNPJ é obrigatório!")
-    @Digits(integer = 14, fraction = 0, message = "Informe um CNPJ válido")
+    //@NotBlank(message = "CNPJ é obrigatório!")
+    //@Digits(integer = 14, fraction = 0, message = "Informe um CNPJ válido")
     private String cnpj;
 
     private String telefone;
 
     private String setor;
 
-    private boolean cobra_embarque = false;
+    private int cobra_embarque;
 
     private String pix;
 
     private String idusuario;
+
+
 
 }

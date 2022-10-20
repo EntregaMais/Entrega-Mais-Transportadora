@@ -48,12 +48,15 @@ public class TransportadoraController {
         HttpEntity<String> request = new HttpEntity<String>(usuarioJsonObject.toString(), headers);
 
         ResponseEntity<String> responseEntityStr = restTemplate.postForEntity(uri, request, String.class);
+        System.out.println(responseEntityStr);
         //JsonNode root = objectMapper.readTree(responseEntityStr.getBody());
+        System.out.println(responseEntityStr.getBody());
         Gson gson = new Gson();
-        Map<String,Object> attributes = gson.fromJson(gson.toJson( responseEntityStr.getBody()),Map.class);
-
-        transportadora.setIdusuario(attributes.get("id").toString());
-
+        System.out.println(gson.toJson( responseEntityStr.getBody()));
+        Map<String,Object> attributes = gson.fromJson(responseEntityStr.getBody(),Map.class);
+        System.out.println(attributes);
+        int idcoletado = ((Number)attributes.get("id")).intValue();
+        transportadora.setIdusuario(Integer.toString(idcoletado));
 
         return ResponseEntity.ok(transportadoraRepository.save(transportadora));
     }
