@@ -11,6 +11,7 @@
 	<groupId>br.com.entrega_mais</groupId>
 	<artifactId>transportadora</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
 	<name>transportadora</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
@@ -74,6 +75,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>transportadora</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

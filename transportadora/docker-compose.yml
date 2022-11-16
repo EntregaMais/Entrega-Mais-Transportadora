@@ -1,0 +1,52 @@
+version: '3.9'
+services:
+  app:
+    container_name: transportadora_app_container
+    build: .
+    ports:
+      - "8181:8181"
+    networks:
+      - entregamaisnetwork
+    restart: on-failure
+
+  # postgres:
+  #   container_name: transportadora_postgres_container
+  #   image: postgres
+  #   environment:
+  #     POSTGRES_USER: ifpb
+  #     POSTGRES_PASSWORD: ifpb
+  #     PGDATA: /data/postgres
+  #   volumes:
+  #     - postgres-data:/data/postgres
+  #   ports:
+  #     - "7721:5432"
+  #   networks:
+  #     - entregamaisnetwork
+  #   restart: unless-stopped
+
+  # pgadmin:
+  #   container_name: transportadora_pgadmin_container
+  #   image: dpage/pgadmin4
+  #   environment:
+  #     PGADMIN_DEFAULT_EMAIL: ifpb@ifpb.edu.br
+  #     PGADMIN_DEFAULT_PASSWORD: ifpb
+  #     PGADMIN_CONFIG_SERVER_MODE: 'False'
+  #   volumes:
+  #     - pgadmin-data:/var/lib/pgadmin
+  #   ports:
+  #     - "7730:80"
+  #   networks:
+  #     - entregamaisnetwork
+  #   depends_on:
+  #     - postgres
+  #   restart: unless-stopped
+
+networks:
+  entregamaisnetwork:
+    name: entregamaisnetwork
+
+volumes:
+  postgres-data:
+  rabbitmq-data:
+  rabbitmq-data-setup:
+  pgadmin-data:
