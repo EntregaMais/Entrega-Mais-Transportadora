@@ -64,7 +64,7 @@ public class TransportadoraController {
     }
 
 
-    @RequestMapping(value = "/TransportadoraPorEmail/{email}", method = RequestMethod.GET)
+    @RequestMapping(value = "/transportadoraPorEmail/{email}", method = RequestMethod.GET)
     public ResponseEntity<Transportadora> GetByEmail(@PathVariable(value = "email") String email)
     {
         Optional<Transportadora> transportadora = transportadoraRepository.findByEmail(email);
@@ -73,6 +73,8 @@ public class TransportadoraController {
         else
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+
+
 
 
 }
