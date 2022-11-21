@@ -9,7 +9,7 @@ import com.google.gson.Gson;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -31,15 +31,19 @@ public class TransportadoraController {
     @Autowired
     TransportadoraRepository transportadoraRepository;
 
+	@Autowired
+	private Environment env;
+
 
     //TODO add validacioes
     @Transactional
     @PostMapping("/salvar")
-	@ConfigurationProperties("config")
     public ResponseEntity<Transportadora > salvar(@RequestBody Transportadora transportadora) throws JSONException, JsonProcessingException {
         //ObjectMapper objectMapper = new ObjectMapper();
 
-        String uri = "http://localhost:8081/api/usuario/salvar";
+		System.out.println(env.getProperty("config.url", "localhost"));
+		
+        String uri = "http://"+env.getProperty("config.url", "localhost")+":8081/api/usuario/salvar";
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -61,6 +65,11 @@ public class TransportadoraController {
         transportadora.setIdusuario(Integer.toString(idcoletado));
 
         return ResponseEntity.ok(transportadoraRepository.save(transportadora));
+    }
+
+	@GetMapping("/ok")
+    public ResponseEntity<String> testandoAPi() {
+        return ResponseEntity.ok("ok");
     }
 
 }
