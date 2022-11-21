@@ -33,7 +33,6 @@ public class TransportadoraController {
     public ResponseEntity<Transportadora > salvar(@RequestBody Transportadora transportadora){
         return ResponseEntity.ok(transportadoraService.salvarTransportadora(transportadora));
     }
-
     @RequestMapping(value = "/transportadoraPorEmail/{email}", method = RequestMethod.GET)
     public ResponseEntity<Transportadora> GetByEmail(@PathVariable(value = "email") String email)
     {
@@ -54,6 +53,11 @@ public class TransportadoraController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
+    }
+
+	@GetMapping("/ok")
+    public ResponseEntity<String> testandoAPi() {
+        return ResponseEntity.ok("ok");
     }
 
 }

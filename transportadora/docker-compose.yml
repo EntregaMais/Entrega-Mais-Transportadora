@@ -4,7 +4,7 @@ services:
     container_name: transportadora_app_container
     build: .
     ports:
-      - "8181:8181"
+      - "7730:7730"
     networks:
       - entregamaisnetwork
     restart: on-failure
@@ -12,14 +12,14 @@ services:
   # postgres:
   #   container_name: transportadora_postgres_container
   #   image: postgres
+  #   ports:
+  #     - "7731:5432"
   #   environment:
   #     POSTGRES_USER: ifpb
   #     POSTGRES_PASSWORD: ifpb
   #     PGDATA: /data/postgres
   #   volumes:
   #     - postgres-data:/data/postgres
-  #   ports:
-  #     - "7721:5432"
   #   networks:
   #     - entregamaisnetwork
   #   restart: unless-stopped
@@ -33,8 +33,8 @@ services:
   #     PGADMIN_CONFIG_SERVER_MODE: 'False'
   #   volumes:
   #     - pgadmin-data:/var/lib/pgadmin
-  #   ports:
-  #     - "7730:80"
+  #    ports:
+  #      - "7739:80"
   #   networks:
   #     - entregamaisnetwork
   #   depends_on:

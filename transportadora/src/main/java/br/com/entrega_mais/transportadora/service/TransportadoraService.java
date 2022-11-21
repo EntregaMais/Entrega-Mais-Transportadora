@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import lombok.SneakyThrows;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -23,10 +24,13 @@ public class TransportadoraService {
     @Autowired
     private TransportadoraRepository transportadoraRepository;
 
+	@Autowired
+	private Environment env;
+	
     @Transactional
     @SneakyThrows
     public Transportadora salvarTransportadora (Transportadora transportadora){
-        String uri = "http://localhost:8080/api/usuario/salvar";
+        String uri = "http://"+this.env.getProperty("config.url", "localhost")+":7720/api/usuario/salvar";
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
