@@ -43,7 +43,7 @@ public class TransportadoraController {
 
 		System.out.println(env.getProperty("config.url", "localhost"));
 		
-        String uri = "http://"+env.getProperty("config.url", "localhost")+":8081/api/usuario/salvar";
+        String uri = "http://"+env.getProperty("config.url", "localhost")+":7720/api/usuario/salvar";
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
