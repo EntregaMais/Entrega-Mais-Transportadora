@@ -46,7 +46,5 @@ networks:
     name: entregamaisnetwork
 
 volumes:
-  postgres-data:
-  rabbitmq-data:
-  rabbitmq-data-setup:
-  pgadmin-data:
+  transportadora-postgres-data:
+  # transportadora-pgadmin-data:
