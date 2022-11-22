@@ -13,6 +13,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 
 import javax.transaction.Transactional;
 import java.util.Map;
@@ -28,6 +31,7 @@ public class TransportadoraService {
 	private Environment env;
 	
     @Transactional
+        @CacheEvict(cacheNames = "Transportadora", allEntries = true)
     @SneakyThrows
     public Transportadora salvarTransportadora (Transportadora transportadora){
         String uri = "http://"+this.env.getProperty("config.url", "localhost")+":7720/api/usuario/salvar";
@@ -56,11 +60,18 @@ public class TransportadoraService {
         return transportadoraRepository.save(transportadora);
     }
 
+    @Cacheable(cacheNames = "Transportadora", key="#email")
     public Optional<Transportadora> encontraTransportadoraPorEmail(String email){
         return transportadoraRepository.findByEmail(email);
     }
 
+    @Cacheable(cacheNames = "Transportadora", key="#id")
+    public Optional<Transportadora> encontraTransportadoraPorId(Long id){
+        return transportadoraRepository.findById(id);
+    }
+
     @Transactional
+        @CacheEvict(cacheNames = "Transportadora", allEntries = true)
     public Transportadora atualizarTransportadora(String email, Transportadora transportadora_atualizada) {
 
         if (transportadoraRepository.findByEmail(email).isPresent()){
