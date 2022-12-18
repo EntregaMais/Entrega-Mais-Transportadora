@@ -3,6 +3,8 @@ services:
   app:
     container_name: transportadora_app_container
     build: .
+    volumes:
+      - transportadora-app-data:/app
     ports:
       - "7730:7730"
     networks:
@@ -19,7 +21,8 @@ services:
   #     POSTGRES_PASSWORD: ifpb
   #     PGDATA: /data/postgres
   #   volumes:
-  #     - postgres-data:/data/postgres
+  #     - transportadora-postgres-data:/data/postgres
+  #     - transportadora-postgres-db-data:/var/lib/postgresql/data
   #   networks:
   #     - entregamaisnetwork
   #   restart: unless-stopped
@@ -27,6 +30,8 @@ services:
     container_name: transportadora_redis_container
     hostname: redis.transportadora
     image: redis
+    volumes: 
+      - transportadora-redis-data:/data
     ports:
       - "7738:6379"
 
@@ -41,7 +46,7 @@ services:
       - "7739:8081"
 
   # pgadmin:
-  #   container_name: transportadora_pgadmin_container
+  #   container_name: pgadmin_container
   #   image: dpage/pgadmin4
   #   environment:
   #     PGADMIN_DEFAULT_EMAIL: ifpb@ifpb.edu.br
@@ -49,8 +54,8 @@ services:
   #     PGADMIN_CONFIG_SERVER_MODE: 'False'
   #   volumes:
   #     - pgadmin-data:/var/lib/pgadmin
-  #    ports:
-  #      - "7739:80"
+  #   ports:
+  #     - "7000:80"
   #   networks:
   #     - entregamaisnetwork
   #   depends_on:
@@ -62,5 +67,8 @@ networks:
     name: entregamaisnetwork
 
 volumes:
-  transportadora-postgres-data:
+  transportadora-app-data:
+  # transportadora-postgres-data:
+  # transportadora-postgres-db-data:
+  transportadora-redis-data:
   # transportadora-pgadmin-data:
