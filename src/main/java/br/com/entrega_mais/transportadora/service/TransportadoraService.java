@@ -31,8 +31,8 @@ public class TransportadoraService {
 	private Environment env;
 	
     @Transactional
-        @CacheEvict(cacheNames = "Transportadora", allEntries = true)
     @SneakyThrows
+    @CacheEvict(cacheNames = "Transportadora", allEntries = true)
     public Transportadora salvarTransportadora (Transportadora transportadora){
         String uri = "http://"+this.env.getProperty("config.url", "localhost")+":7720/api/usuario/salvar";
         RestTemplate restTemplate = new RestTemplate();
