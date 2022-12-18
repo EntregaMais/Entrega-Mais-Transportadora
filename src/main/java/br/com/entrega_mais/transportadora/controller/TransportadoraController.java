@@ -21,7 +21,7 @@ import java.util.Optional;
 
 
 @RestController
-@RequestMapping("/api/transportadoras")
+@RequestMapping("/api/transportadora")
 public class TransportadoraController {
 
     @Autowired
@@ -33,6 +33,8 @@ public class TransportadoraController {
     public ResponseEntity<Transportadora > salvar(@RequestBody Transportadora transportadora){
         return ResponseEntity.ok(transportadoraService.salvarTransportadora(transportadora));
     }
+
+
     @RequestMapping(value = "/transportadoraPorEmail/{email}", method = RequestMethod.GET)
     public ResponseEntity<Transportadora> GetByEmail(@PathVariable(value = "email") String email)
     {
@@ -42,6 +44,19 @@ public class TransportadoraController {
         else
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+
+
+    @RequestMapping(value = "/transportadoraPorId/{id}", method = RequestMethod.GET)
+    public ResponseEntity<Transportadora> GetById(@PathVariable(value = "id") Long id){
+
+        Optional<Transportadora> transportadora = transportadoraService.encontraTransportadoraPorId(id);
+
+        if(transportadora.isPresent())
+            return new ResponseEntity<>(transportadora.get(), HttpStatus.OK);
+        else
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
 
     @PostMapping("/transportadoraEdicao/{email}")
     public ResponseEntity<Transportadora> editar (@PathVariable(value = "email") String email, @RequestBody Transportadora transportadora){
@@ -54,6 +69,7 @@ public class TransportadoraController {
         }
 
     }
+
 
 	@GetMapping("/ok")
     public ResponseEntity<String> testandoAPi() {
