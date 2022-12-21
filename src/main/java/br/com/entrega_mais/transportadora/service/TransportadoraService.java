@@ -3,6 +3,8 @@ package br.com.entrega_mais.transportadora.service;
 import br.com.entrega_mais.transportadora.model.Transportadora;
 import br.com.entrega_mais.transportadora.repository.TransportadoraRepository;
 import com.google.gson.Gson;
+
+import lombok.Data;
 import lombok.SneakyThrows;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,7 @@ import javax.transaction.Transactional;
 import java.util.Map;
 import java.util.Optional;
 
+@Data
 @Service
 public class TransportadoraService {
 
@@ -90,5 +93,6 @@ public class TransportadoraService {
             return null;
         }
     }
+
 
 }
